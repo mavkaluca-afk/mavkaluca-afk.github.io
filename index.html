@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Emma!</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #FFB6C1 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .card-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card-container:hover {
+            transform: scale(1.02);
+        }
+
+        .birthday-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: nameFloat 3s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #34495E;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 0.5s forwards;
+        }
+
+        .balloon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+        }
+
+        .celebrate-btn {
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            position: relative;
+        }
+
+        .celebrate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .celebrate-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+
+        @keyframes nameFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes balloonFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(700px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                width: 80%;
+                height: 80%;
+                padding: 20px;
+            }
+            
+            .birthday-title {
+                font-size: 2rem;
+            }
+            
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card-container" onclick="triggerCelebration()">
+        <div class="balloon-container">
+            <svg width="100%" height="100%" viewBox="0 0 400 600">
+                <!-- Floating Balloons -->
+                <g class="balloon-group" style="animation: balloonFloat 4s ease-in-out infinite;">
+                    <ellipse cx="80" cy="150" rx="25" ry="35" fill="#FF6B9D" opacity="0.8"/>
+                    <line x1="80" y1="185" x2="80" y2="220" stroke="#666" stroke-width="1"/>
+                </g>
+                <g class="balloon-group" style="animation: balloonFloat 4s ease-in-out infinite 1s;">
+                    <ellipse cx="320" cy="180" rx="25" ry="35" fill="#4ECDC4" opacity="0.8"/>
+                    <line x1="320" y1="215" x2="320" y2="250" stroke="#666" stroke-width="1"/>
+                </g>
+                <g class="balloon-group" style="animation: balloonFloat 4s ease-in-out infinite 2s;">
+                    <ellipse cx="50" cy="400" rx="20" ry="30" fill="#FFD93D" opacity="0.8"/>
+                    <line x1="50" y1="430" x2="50" y2="460" stroke="#666" stroke-width="1"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="confetti-container" id="confettiContainer"></div>
+
+        <h1 class="birthday-title">Happy Birthday</h1>
+        <h2 class="name">Nuella</h2>
+        <p class="message">
+            Wishing you a day filled with happiness<br>
+            and a year filled with joy!<br>
+            May all your dreams come true! 🎉
+        </p>
+        <button class="celebrate-btn" onclick="event.stopPropagation(); triggerCelebration();">
+            🎊 Celebrate! 🎊
+        </button>
+    </main>
+
+    <script>
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#FF6B9D', '#4ECDC4', '#FFD93D', '#FF8A80', '#81C784', '#64B5F6'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animation = `confettiFall ${confetti.style.animationDuration} linear ${confetti.style.animationDelay}`;
+                
+                container.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, 5000);
+            }
+        }
+
+        function createSparkles(event) {
+            const sparkleColors = ['#FFD700', '#FF69B4', '#00CED1', '#FF6347'];
+            
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.innerHTML = '✨';
+                sparkle.style.left = (event.clientX - 10 + Math.random() * 20) + 'px';
+                sparkle.style.top = (event.clientY - 10 + Math.random() * 20) + 'px';
+                sparkle.style.color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+                sparkle.style.animation = `sparkle 1s ease-out ${Math.random() * 0.5}s`;
+                sparkle.style.position = 'fixed';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 1500);
+            }
+        }
+
+        function triggerCelebration() {
+            createConfetti();
+            
+            // Add click sparkles
+            document.addEventListener('click', createSparkles);
+            
+            // Remove sparkle listener after 3 seconds
+            setTimeout(() => {
+                document.removeEventListener('click', createSparkles);
+            }, 3000);
+            
+            // Add extra celebration effects
+            const card = document.querySelector('.card-container');
+            card.style.animation = 'none';
+            card.offsetHeight; // Trigger reflow
+            card.style.animation = 'titleGlow 0.5s ease-in-out 3';
+        }
+
+        // Auto-trigger a gentle celebration on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'990ae929b57b8239',t:'MTc2MDgyMDY1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
